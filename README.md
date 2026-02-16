@@ -20,18 +20,6 @@ Python >= 3.10.
 
 ## Quick Start
 
-### 1. Install
-
-```bash
-# From GitHub
-uvx --from git+https://github.com/elvismdev/mem0-mcp-selfhosted.git mem0-mcp-selfhosted
-
-# Or install locally
-pip install -e .
-```
-
-### 2. Configure Claude Code
-
 Add to your Claude Code MCP settings (`~/.claude/settings.json` or project `.mcp.json`):
 
 ```json
@@ -52,11 +40,13 @@ Add to your Claude Code MCP settings (`~/.claude/settings.json` or project `.mcp
 }
 ```
 
-That's it. The server auto-reads your Claude Max OAT token from `~/.claude/.credentials.json` -- no manual token configuration needed.
+`uvx` automatically downloads, installs, and runs the server in an isolated environment — no manual installation needed. Claude Code launches it on demand when the MCP connection starts.
 
-### 3. Use It
+The server auto-reads your OAT token from `~/.claude/.credentials.json` — no manual token configuration needed.
 
-In Claude Code:
+### Try It
+
+Restart Claude Code, then:
 
 ```
 > Search my memories for TypeScript preferences
@@ -195,7 +185,7 @@ All configuration is via environment variables. Create a `.env` file or set them
 ## Architecture
 
 ```
-Claude Code (Max Subscription)
+Claude Code
   |
   └── MCP stdio/SSE/streamable-http
         |
@@ -220,7 +210,7 @@ Claude Code (Max Subscription)
 
 ## Graph Memory & Quota
 
-Graph memory is **disabled by default** (`MEM0_ENABLE_GRAPH=false`) to protect your Claude Max quota. Each `add_memory` with graph enabled triggers 3 additional LLM calls for entity extraction, relationship generation, and conflict resolution.
+Graph memory is **disabled by default** (`MEM0_ENABLE_GRAPH=false`) to protect your Claude quota. Each `add_memory` with graph enabled triggers 3 additional LLM calls for entity extraction, relationship generation, and conflict resolution.
 
 ### Using Ollama for Graph Operations
 
