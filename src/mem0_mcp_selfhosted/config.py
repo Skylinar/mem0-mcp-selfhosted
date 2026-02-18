@@ -71,7 +71,7 @@ def build_config() -> tuple[dict[str, Any], dict[str, str], dict[str, Any] | Non
     # --- Build config dict ---
     config_dict: dict[str, Any] = {
         "llm": {
-            "provider": "anthropic",
+            "provider": "ollama",
             "config": llm_config,
         },
         "embedder": {
