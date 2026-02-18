@@ -72,7 +72,11 @@ def build_config() -> tuple[dict[str, Any], dict[str, str], dict[str, Any] | Non
     config_dict: dict[str, Any] = {
         "llm": {
             "provider": "ollama",
-            "config": llm_config,
+            "config": {
+                "model": os.environ.get("MEM0_LLM_MODEL", "mistral:7b-instruct"),
+                "ollama_base_url": os.environ.get("MEM0_LLM_URL", "http://localhost:11434"),
+            }
+            #"config": llm_config,
         },
         "embedder": {
             "provider": embed_provider,  # Explicit — never rely on mem0ai's openai default
